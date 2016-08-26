@@ -3,9 +3,10 @@ const fs = require('fs')
 const path = require('path')
 
 class Snippets {
-  constructor (dir) {
+  constructor (dir, console) {
     this.dir = dir
     this.index = {}
+    this.console = console
     this.snippetDir = path.join(this.dir, 'snippets')
     this.indexSnippets()
   }
@@ -24,22 +25,37 @@ class Snippets {
   }
 
   create (name, content) {
-    this.index[name] = contents
+    this.index[name] = content
     const filePath = path.join(this.snippetDir, name)
-    fs.writeFile(filePath, content)
+    fs.writeFile(filePath, content, (err) => {
+      if (err) this.console.log('warn', err)
+    })
   }
 
   search (name) {
     return this.index[name]
   }
+
+  delete (name) {
+    delete this.index[name]
+    const filePath = path.join(this.snippetDir, name)
+    fs.unlink(filePath, function (err) {
+      if (err) this.console.log('warn', err)
+    })
+  }
 }
 
 
 module.exports = (pluginContext) => {
-  const snippets = new Snippets(pluginContext.cwd)
+  const { cwd, console } = pluginContext
+  const snippets = new Snippets(cwd, console)
 
   ipc.on('newSnippet', (name, contents) => {
     snippets.create(name, contents)
+  })
+
+  ipc.on('deleteSnippet', (name) => {
+    snippets.delete(name)
   })
 
   ipc.on('searchSnippets', (name, cb) => {
@@ -47,6 +63,6 @@ module.exports = (pluginContext) => {
   })
 
   return () => {
-    resolve('pong')
+    return Promise.resolve('pong')
   }
 }

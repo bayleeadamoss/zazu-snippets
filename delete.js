@@ -9,11 +9,12 @@ module.exports = (pluginContext) => {
         } else {
           resolve([{
             id: key,
-            title: key,
-            value: value,
+            title: `Delete snippet called "${key}"`,
+            value: key,
           }])
         }
       })
     })
   }
 }
+

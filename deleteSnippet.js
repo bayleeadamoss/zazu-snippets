@@ -3,7 +3,7 @@ const ipc = require('./ipc')
 module.exports = (pluginContext) => {
   return (name, env = {}) => {
     const content = pluginContext.clipboard.readText()
-    ipc.emit('newSnippet', name, content)
+    ipc.emit('deleteSnippet', name, content)
     return Promise.resolve()
   }
 }
