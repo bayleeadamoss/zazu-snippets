@@ -1,6 +1,6 @@
 module.exports = {
   name: 'Zazu Snippets',
-  icon: 'icon.png',
+  icon: 'snip.svg',
   blocks: {
     input: [
       {
