@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const fuzzy = require('fuzzyfind')
 
 class Snippets {
   constructor (dir, console) {
@@ -32,7 +33,14 @@ class Snippets {
   }
 
   search (name) {
-    return this.index[name]
+    const accessor = (obj) => obj.key
+    const items = Object.keys(this.index).map((key) => {
+      return {
+        key,
+        value: this.index[key],
+      }
+    })
+    return fuzzy(name, items, { accessor })
   }
 
   delete (name) {
