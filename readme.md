@@ -2,8 +2,22 @@
 
 ## Usage
 
+Finding a snippet:
+
 ~~~
 snip emoji
+~~~
+
+Creating a snippet from your clipboard:
+
+~~~
+snipc emoji
+~~~
+
+Delete a snippet by name:
+
+~~~
+snipd emoji
 ~~~
 
 ## Installing
