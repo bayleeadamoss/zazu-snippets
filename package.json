@@ -18,5 +18,8 @@
   "homepage": "https://github.com/tinytacoteam/zazu-snippets#readme",
   "devDependencies": {
     "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "js-htmlencode": "^0.2.0"
   }
 }
