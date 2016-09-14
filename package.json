@@ -1,0 +1,22 @@
+{
+  "name": "zazu-snippets",
+  "version": "0.1.0",
+  "description": "Snippets for Zazu App.",
+  "main": "zazu.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinytacoteam/zazu-snippets.git"
+  },
+  "author": "Tiny Taco Team",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/tinytacoteam/zazu-snippets/issues"
+  },
+  "homepage": "https://github.com/tinytacoteam/zazu-snippets#readme",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  }
+}

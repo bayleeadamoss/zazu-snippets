@@ -1,4 +1,4 @@
-const ipc = require('./ipc')
+const ipc = require('./lib/ipc')
 
 module.exports = (pluginContext) => {
   return (name, env = {}) => {

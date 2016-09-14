@@ -1,4 +1,4 @@
-const ipc = require('./ipc')
+const ipc = require('./lib/ipc')
 const fs = require('fs')
 const path = require('path')
 

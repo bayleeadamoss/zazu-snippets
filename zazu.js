@@ -6,7 +6,7 @@ module.exports = {
       {
         id: 'SnipCache',
         type: 'ServiceScript',
-        script: 'cacheSnippets.js',
+        script: 'src/cacheSnippets.js',
         interval: 30 * 1000,
       },
     ],
@@ -17,7 +17,7 @@ module.exports = {
         prefix: 'snip',
         space: true,
         args: 'Required',
-        script: 'read.js',
+        script: 'src/read.js',
         connections: ['Copy'],
       },
       {
@@ -26,7 +26,7 @@ module.exports = {
         prefix: 'snipc',
         space: true,
         args: 'Required',
-        script: 'write.js',
+        script: 'src/write.js',
         connections: ['WriteSnippet'],
       },
       {
@@ -35,7 +35,7 @@ module.exports = {
         prefix: 'snipd',
         space: true,
         args: 'Required',
-        script: 'delete.js',
+        script: 'src/delete.js',
         connections: ['DeleteSnippet'],
       },
     ],
@@ -48,13 +48,13 @@ module.exports = {
       {
         id: 'WriteSnippet',
         type: 'UserScript',
-        script: 'writeSnippet.js',
+        script: 'src/writeSnippet.js',
         value: '{value}',
       },
       {
         id: 'DeleteSnippet',
         type: 'UserScript',
-        script: 'deleteSnippet.js',
+        script: 'src/deleteSnippet.js',
         value: '{value}',
       },
     ],
