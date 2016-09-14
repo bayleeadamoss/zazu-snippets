@@ -2,8 +2,8 @@ const fs = require('fs')
 const path = require('path')
 
 class Snippets {
-  constructor () {
-    this.dir = '../../'
+  constructor (dir, console) {
+    this.dir = dir
     this.index = {}
     this.console = console
     this.snippetDir = path.join(this.dir, 'snippets')
@@ -44,4 +44,7 @@ class Snippets {
   }
 }
 
-module.exports = new Snippets
+var singleton = null
+module.exports = (dir, console) => {
+  return singleton || (singleton = new Snippets(dir, console))
+}

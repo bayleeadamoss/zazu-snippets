@@ -1,6 +1,7 @@
-const snippets = require('./lib/snippets')
-
 module.exports = (pluginContext) => {
+  const { cwd, console } = pluginContext
+  const snippets = require('./lib/snippets')(cwd, console)
+
   return (key, env = {}) => {
     return new Promise((resolve, reject) => {
       const value = snippets.search(key)
