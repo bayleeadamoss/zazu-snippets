@@ -1,19 +1,18 @@
-const ipc = require('./lib/ipc')
+const snippets = require('./lib/snippets')
 
 module.exports = (pluginContext) => {
   return (key, env = {}) => {
     return new Promise((resolve, reject) => {
-      ipc.emit('searchSnippets', key, (value) => {
-        if (!value) {
-          return Promise.resolve()
-        } else {
-          resolve([{
-            id: key,
-            title: key,
-            value: value,
-          }])
-        }
-      })
+      const value = snippets.search(key)
+      if (!value) {
+        return Promise.resolve()
+      } else {
+        resolve([{
+          id: key,
+          title: key,
+          value: value,
+        }])
+      }
     })
   }
 }

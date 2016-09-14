@@ -1,9 +1,8 @@
-const ipc = require('./lib/ipc')
+const snippets = require('./lib/snippets')
 
 module.exports = (pluginContext) => {
   return (name, env = {}) => {
-    const content = pluginContext.clipboard.readText()
-    ipc.emit('deleteSnippet', name, content)
+    snippets.delete(name)
     return Promise.resolve()
   }
 }

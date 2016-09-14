@@ -2,14 +2,6 @@ module.exports = {
   name: 'Zazu Snippets',
   icon: 'snip.svg',
   blocks: {
-    external: [
-      {
-        id: 'SnipCache',
-        type: 'ServiceScript',
-        script: 'src/cacheSnippets.js',
-        interval: 30 * 1000,
-      },
-    ],
     input: [
       {
         id: 'Read',
