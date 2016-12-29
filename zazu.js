@@ -1,3 +1,4 @@
+// Deprecated use zazu.json instead
 module.exports = {
   name: 'Zazu Snippets',
   icon: 'snip.svg',
@@ -53,4 +54,3 @@ module.exports = {
     ],
   },
 }
-
