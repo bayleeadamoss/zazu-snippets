@@ -22,8 +22,12 @@ snipd emoji
 
 ## Installing
 
-Add the package to your plugins array in `./zazurc.js`.
+Add the package to your plugins array in `./zazurc.json`.
 
-~~~ javascript
-'tinytacoteam/zazu-snippets',
+~~~ json
+{
+  "plugins": [
+    "tinytacoteam/zazu-snippets"
+  ]
+}
 ~~~
