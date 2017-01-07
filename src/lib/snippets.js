@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const fuzzy = require('fuzzyfind')
+const { htmlEncode } = require('js-htmlencode')
 
 class Snippets {
   constructor (dir, console) {
@@ -15,11 +16,13 @@ class Snippets {
     fs.readdir(this.snippetDir, (err, data) => {
       if (err) return this.console.log('warn', err)
       data.map((file) => {
-        const filePath = path.join(this.snippetDir, file)
-        fs.readFile(filePath, (err, data) => {
-          if (err) return this.console.log('warn', err)
-          this.index[file] = data.toString()
-        })
+        if (file !== '.gitkeep' && file !== '.DS_Store') {
+          const filePath = path.join(this.snippetDir, file)
+          fs.readFile(filePath, (err, data) => {
+            if (err) return this.console.log('warn', err)
+            this.index[file] = data.toString()
+          })
+        }
       })
     })
   }
@@ -40,7 +43,18 @@ class Snippets {
         value: this.index[key],
       }
     })
-    return fuzzy(name, items, { accessor })
+    return fuzzy(name, items, { accessor }).map((result) => {
+      return {
+        id: result.key,
+        title: result.key,
+        subtitle: 'Copy snippet to clipboard.',
+        value: result.value,
+        preview: `
+          <pre class='text'>${htmlEncode(result.value)}</pre>
+          <div class='meta'>${result.value.length} characters</div>
+        `
+      }
+    })
   }
 
   delete (name) {
