@@ -1,8 +1,7 @@
 module.exports = (pluginContext) => {
-  const { cwd, console } = pluginContext
-  const snippets = require('./lib/snippets')(cwd, console)
-
   return (name, env = {}) => {
+    const { console } = pluginContext
+    const snippets = require('./lib/snippets')(console, env)
     snippets.delete(name)
     return Promise.resolve()
   }

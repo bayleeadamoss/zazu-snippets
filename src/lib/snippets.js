@@ -1,14 +1,19 @@
 const fs = require('fs')
+const os = require('os')
 const path = require('path')
 const fuzzy = require('fuzzyfind')
 const { htmlEncode } = require('js-htmlencode')
 
 class Snippets {
-  constructor (dir, console) {
-    this.dir = dir
+  constructor (console, env={}) {
+    // If user defined a folder name use it otherwise use zazu-snippets
+    const folder = (env.hasOwnProperty('folder')) ? env.folder : 'zazu-snippets'
+    // Default is os specific `[home_directory]/zazu-snippets`
+    this.snippetDir = path.join(os.homedir(), folder)
+    // Make directory if it does not already exist
+    if (!fs.existsSync(this.snippetDir)) { fs.mkdirSync(this.snippetDir) }
     this.index = {}
     this.console = console
-    this.snippetDir = path.join(this.dir, 'snippets')
     this.indexSnippets()
   }
 
@@ -67,6 +72,6 @@ class Snippets {
 }
 
 var singleton = null
-module.exports = (dir, console) => {
-  return singleton || (singleton = new Snippets(dir, console))
+module.exports = (console, env={}) => {
+  return singleton || (singleton = new Snippets(console, env))
 }
