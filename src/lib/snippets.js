@@ -6,15 +6,27 @@ const { htmlEncode } = require('js-htmlencode')
 
 class Snippets {
   constructor (console, env={}) {
-    // If user defined a folder name use it otherwise use zazu-snippets
-    const folder = (env.hasOwnProperty('folder')) ? env.folder : 'zazu-snippets'
-    // Default is os specific `[home_directory]/zazu-snippets`
-    this.snippetDir = path.join(os.homedir(), folder)
+    this.console = console
+    this.env = env
+    // Default or configured path to snippet directory
+    this.snippetDir = path.join(this.getDirectory(), this.getFolder())
     // Make directory if it does not already exist
     if (!fs.existsSync(this.snippetDir)) { fs.mkdirSync(this.snippetDir) }
     this.index = {}
-    this.console = console
     this.indexSnippets()
+  }
+
+  // Determines if a variable was set
+  envHas(variable) { return this.env.hasOwnProperty(variable) }
+
+  // If user defined a directory use it otherwise use home directory
+  getDirectory() {
+    return (this.envHas('directory') ? path.normalize(this.env.directory) : os.homedir())
+  }
+
+  // If user defined a folder name use it otherwise use .zazu-snippets
+  getFolder() {
+    return (this.envHas('folder') ? this.env.folder : '.zazu-snippets')
   }
 
   indexSnippets () {
