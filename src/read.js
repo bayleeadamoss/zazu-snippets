@@ -1,14 +1,10 @@
 module.exports = (pluginContext) => {
   return (query, env = {}) => {
     const { cwd, console } = pluginContext
+    const snippets = require('./lib/snippets')(console, env)
     return new Promise((resolve, reject) => {
-      const snippets = require('./lib/snippets')(cwd, console)
       const results = snippets.search(query)
-      if (!results) {
-        resolve([])
-      } else {
-        resolve(results)
-      }
+      resolve(results ? results : [])
     })
   }
 }
